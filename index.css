@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Variáveis de Área Segura (Notch e Barra de Gestos) */
+  --sat: env(safe-area-inset-top);
+  --sab: env(safe-area-inset-bottom);
+  --sal: env(safe-area-inset-left);
+  --sar: env(safe-area-inset-right);
+}
+
+body {
+  /* Impede seleção de texto (comportamento de app) */
+  user-select: none;
+  -webkit-user-select: none;
+  /* Remove o "piscar" azul ao tocar em botões no Android/iOS */
+  -webkit-tap-highlight-color: transparent;
+  /* Fonte nativa do sistema */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* Evita o "efeito elástico" ao rolar além do topo/fundo */
+  overscroll-behavior-y: none;
+  background-color: #F8FAFC; /* Slate-50 */
+}
+
+/* Modo Escuro */
+.dark body {
+  background-color: #020617; /* Slate-950 */
+}
+
+/* Utilitários para Áreas Seguras */
+.pt-safe { padding-top: var(--sat); }
+.pb-safe { padding-bottom: var(--sab); }
+.pb-safe-extra { padding-bottom: calc(var(--sab) + 5rem); } /* Espaço para o menu não cobrir conteúdo */
+
+/* Esconder barra de rolagem mas permitir rolar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animações Suaves */
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-enter {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
